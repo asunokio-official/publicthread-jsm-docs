@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PublicThread for JSM Documentation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #faf9f6;
+    --surface: #ffffff;
+    --ink: #21242c;
+    --ink-soft: #4b5160;
+    --muted: #767c8a;
+    --border: #e4e1d8;
+    --accent: #35507d;
+    --accent-soft: #eef2f8;
+    --code-bg: #f2f0ea;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14161b;
+      --surface: #1a1d24;
+      --ink: #e7e6e1;
+      --ink-soft: #b9bcc4;
+      --muted: #8b909c;
+      --border: #2b2f38;
+      --accent: #8fb2e0;
+      --accent-soft: #202838;
+      --code-bg: #21242c;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #14161b;
+    --surface: #1a1d24;
+    --ink: #e7e6e1;
+    --ink-soft: #b9bcc4;
+    --muted: #8b909c;
+    --border: #2b2f38;
+    --accent: #8fb2e0;
+    --accent-soft: #202838;
+    --code-bg: #21242c;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', -apple-system, 'Hiragino Sans', sans-serif;
+    line-height: 1.7;
+    padding-inline: 20px;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding-block: 56px 80px;
+  }
+
+  header.doc-head {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 28px;
+    margin-bottom: 40px;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(28px, 5vw, 38px);
+    margin: 10px 0 14px;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .meta strong { color: var(--ink-soft); font-weight: 600; }
+
+  h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 44px 0 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  h2 .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 22px 0 6px;
+  }
+
+  p, li { color: var(--ink-soft); font-size: 15.5px; max-width: 68ch; }
+  strong { color: var(--ink); }
+  ul, ol { padding-left: 1.3em; margin: 10px 0; }
+  li { margin-bottom: 6px; }
+
+  code {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--code-bg);
+    color: var(--ink);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 14px 0;
+  }
+  pre code { background: none; padding: 0; }
+
+  .callout {
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin: 18px 0;
+  }
+  .callout p { color: var(--ink-soft); margin: 0; font-size: 14.5px; }
+
+  .field-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 14.5px;
+  }
+  .field-table th, .field-table td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink-soft);
+    vertical-align: top;
+  }
+  .field-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .field-table td code { white-space: nowrap; }
+
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+  footer.doc-foot {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="doc-head">
+    <div class="eyebrow">Documentation</div>
+    <h1>PublicThread for JSM</h1>
+    <div class="meta">
+      <span><strong>Vendor</strong> Seisuke Nagahara</span>
+      <span><strong>Version</strong> 2.0.0</span>
+      <span><strong>Contact</strong> <a href="mailto:isanayasiro10@gmail.com">isanayasiro10@gmail.com</a></span>
+    </div>
+  </header>
+
+  <p>PublicThread for JSM adds one action to Jira Automation: <strong>Get Public Conversation (PublicThread for JSM)</strong>. This page covers how to add it to a rule, what each setting does, and how to use its output in later steps.</p>
+
+  <h2><span class="num">01</span> Adding the action to a rule</h2>
+  <ol>
+    <li>Open the Jira Service Management project you want to automate, then go to <strong>Project settings → Automation</strong> (or a global rule under <strong>Jira settings → System → Automation rules</strong>).</li>
+    <li>Create or edit a rule. Add any trigger that gives you a Service Management request &mdash; for example <em>Manual trigger</em>, <em>Issue created</em>, or <em>Issue transitioned</em>.</li>
+    <li>Add a new action and search for <strong>Get Public Conversation (PublicThread for JSM)</strong>.</li>
+    <li>Fill in the fields described below, then <strong>Save</strong>.</li>
+    <li>Add further actions (for example <em>Send email</em> or <em>Add comment</em>) that use the action&rsquo;s output.</li>
+  </ol>
+
+  <h2><span class="num">02</span> Action settings</h2>
+  <table class="field-table">
+    <tr><th>Field</th><th>What it does</th></tr>
+    <tr><td>Request/Issue key</td><td>The Service Management request to read. Usually left as <code>{{issue.key}}</code> so the action runs against the issue the rule is triggered on.</td></tr>
+    <tr><td>Maximum comments</td><td>How many of the most recent public comments to include (1&ndash;50). Leave blank for the default of 10.</td></tr>
+    <tr><td>Show author name</td><td>When on, each comment is prefixed with the commenter&rsquo;s display name.</td></tr>
+    <tr><td>Show timestamp</td><td>When on, each comment includes when it was posted.</td></tr>
+    <tr><td>Include agent replies</td><td>When on (default), public replies from support agents are included alongside the customer&rsquo;s own comments. Turn it off to keep only the customer&rsquo;s side of the conversation.</td></tr>
+  </table>
+
+  <div class="callout">
+    <p><strong>Internal notes are never an option here.</strong> There is no setting to include them &mdash; they are excluded unconditionally by the action&rsquo;s own code, regardless of any other field.</p>
+  </div>
+
+  <h2><span class="num">03</span> Using the output</h2>
+  <p>Automation names the action&rsquo;s output after the action itself, camelCased. For an action added as <strong>Get Public Conversation (PublicThread for JSM)</strong> with the default outputs entity name, later steps reference it as <code>{{fetchedJiraThread.&hellip;}}</code>:</p>
+  <table class="field-table">
+    <tr><th>Smart Value</th><th>Contents</th></tr>
+    <tr><td><code>{{fetchedJiraThread.conversationText}}</code></td><td>Plain-text transcript of the included comments, in chronological order.</td></tr>
+    <tr><td><code>{{fetchedJiraThread.conversationHtml}}</code></td><td>The same transcript, pre-escaped and ready to paste into an HTML email body.</td></tr>
+    <tr><td><code>{{fetchedJiraThread.commentCount}}</code></td><td>The number of comments included in the output.</td></tr>
+  </table>
+  <p>If your rule editor shows a different entity name for the action&rsquo;s output, use the name shown there instead &mdash; Automation derives it from the action&rsquo;s position in the rule, and it can vary rule to rule.</p>
+
+  <h3>Example: a summary email</h3>
+  <pre><code>Action: Send email
+To: {{issue.reporter.emailAddress}}
+Subject: Update on {{issue.key}}
+Body:
+Hi {{issue.reporter.displayName}},
+
+Here is the conversation so far ({{fetchedJiraThread.commentCount}} comments):
+
+{{fetchedJiraThread.conversationText}}</code></pre>
+
+  <h2><span class="num">04</span> Troubleshooting</h2>
+  <ul>
+    <li><strong>Output is empty / commentCount is 0.</strong> The request may have no public comments yet, or the running user may not have permission to view it &mdash; the action reflects the same access the rule&rsquo;s actor has.</li>
+    <li><strong>Agent replies missing.</strong> Check that <em>Include agent replies</em> is turned on.</li>
+    <li><strong>Smart Value shows literally as <code>{{fetchedJiraThread...}}</code>.</strong> The entity name in your rule differs from the example above &mdash; open the action step in the rule editor to see the exact name Automation assigned it.</li>
+  </ul>
+
+  <h2><span class="num">05</span> Related documents</h2>
+  <ul>
+    <li><a href="https://claude.ai/code/artifact/d406a5be-c53b-432b-be72-6ed543818a07">Privacy Policy</a></li>
+    <li><a href="https://claude.ai/code/artifact/81bbf41b-44b3-4d72-b168-d7c8c3147dea">End User Agreement</a></li>
+  </ul>
+
+  <h2><span class="num">06</span> Support</h2>
+  <p>Questions or issues with the action: <a href="mailto:isanayasiro10@gmail.com">isanayasiro10@gmail.com</a>.</p>
+
+  <footer class="doc-foot">
+    PublicThread for JSM &middot; an independently developed Atlassian Marketplace app for Jira Service Management Cloud &middot; not affiliated with or endorsed by Atlassian beyond standard Marketplace listing.
+  </footer>
+</div>
+</body>
+</html>

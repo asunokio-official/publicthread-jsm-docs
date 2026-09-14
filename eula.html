@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PublicThread End User Agreement</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #faf9f6;
+    --surface: #ffffff;
+    --ink: #21242c;
+    --ink-soft: #4b5160;
+    --muted: #767c8a;
+    --border: #e4e1d8;
+    --accent: #35507d;
+    --accent-soft: #eef2f8;
+    --code-bg: #f2f0ea;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14161b;
+      --surface: #1a1d24;
+      --ink: #e7e6e1;
+      --ink-soft: #b9bcc4;
+      --muted: #8b909c;
+      --border: #2b2f38;
+      --accent: #8fb2e0;
+      --accent-soft: #202838;
+      --code-bg: #21242c;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #14161b;
+    --surface: #1a1d24;
+    --ink: #e7e6e1;
+    --ink-soft: #b9bcc4;
+    --muted: #8b909c;
+    --border: #2b2f38;
+    --accent: #8fb2e0;
+    --accent-soft: #202838;
+    --code-bg: #21242c;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', -apple-system, 'Hiragino Sans', sans-serif;
+    line-height: 1.7;
+    padding-inline: 20px;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding-block: 56px 80px;
+  }
+
+  header.doc-head {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 28px;
+    margin-bottom: 40px;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(28px, 5vw, 38px);
+    margin: 10px 0 14px;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .meta strong { color: var(--ink-soft); font-weight: 600; }
+
+  h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 44px 0 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  h2 .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 20px 0 6px;
+  }
+
+  p, li { color: var(--ink-soft); font-size: 15.5px; max-width: 65ch; }
+  strong { color: var(--ink); }
+  ul, ol { padding-left: 1.3em; margin: 10px 0; }
+  li { margin-bottom: 6px; }
+
+  code {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--code-bg);
+    color: var(--ink);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  .callout {
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin: 18px 0;
+  }
+  .callout p { color: var(--ink-soft); margin: 0; font-size: 14.5px; }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14.5px;
+  }
+  .price-row:last-child { border-bottom: none; }
+  .price-row .val {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+  footer.doc-foot {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="doc-head">
+    <div class="eyebrow">End User Agreement</div>
+    <h1>PublicThread for JSM</h1>
+    <div class="meta">
+      <span><strong>Vendor</strong> Seisuke Nagahara</span>
+      <span><strong>Effective</strong> September 14, 2026</span>
+      <span><strong>Contact</strong> <a href="mailto:isanayasiro10@gmail.com">isanayasiro10@gmail.com</a></span>
+    </div>
+  </header>
+
+  <p>This End User Agreement (&ldquo;Agreement&rdquo;) is between you, the customer installing or using <strong>PublicThread for JSM</strong> (the &ldquo;App&rdquo;) on Atlassian Marketplace, and Seisuke Nagahara, operating as an individual developer (&ldquo;we&rdquo;, &ldquo;us&rdquo;). It governs your use of the App in addition to &mdash; and does not replace &mdash; the <a href="https://www.atlassian.com/legal/marketplace-terms" target="_blank" rel="noopener">Atlassian Marketplace Terms of Use</a>, which also apply to every Marketplace transaction. By installing the App, you agree to both.</p>
+
+  <h2><span class="num">01</span> The license</h2>
+  <p>Subject to this Agreement and payment of any applicable fees, we grant you a non-exclusive, non-transferable, revocable license to install and use the App on the Atlassian Cloud site(s) covered by your subscription, for the duration that subscription is active. All rights in the App not expressly granted here are reserved.</p>
+
+  <h2><span class="num">02</span> What the App does</h2>
+  <p>The App adds a Jira Automation action that reads a Jira Service Management request&rsquo;s customer-visible (public) comments and returns them as formatted text for use elsewhere in the same Automation rule. Internal notes are excluded by design. Full technical and data-handling details are in the <a href="https://claude.ai/code/artifact/d406a5be-c53b-432b-be72-6ed543818a07" id="privacy-link">Privacy Policy</a>.</p>
+
+  <h2><span class="num">03</span> Pricing &amp; billing</h2>
+  <div class="callout">
+    <div class="price-row"><span>Plan</span><span class="val">PublicThread for JSM — Cloud</span></div>
+    <div class="price-row"><span>Price</span><span class="val">US$10 / site / month</span></div>
+    <div class="price-row"><span>Billed by</span><span class="val">Atlassian (Paid via Atlassian)</span></div>
+  </div>
+  <p>The App is sold under Atlassian&rsquo;s <strong>Paid via Atlassian</strong> program: Atlassian bills you directly and handles payment collection, invoicing, and tax, under its own billing terms. We never see or store your payment details. Pricing may change for future terms; any change will be reflected on the App&rsquo;s Marketplace listing before it takes effect for a new billing period.</p>
+
+  <h2><span class="num">04</span> Support</h2>
+  <p>We provide best-effort email support at <a href="mailto:isanayasiro10@gmail.com">isanayasiro10@gmail.com</a>, with an initial response target of one business day. This is a best-effort commitment from an individual developer, not a contractual SLA with guaranteed uptime or resolution times.</p>
+
+  <h2><span class="num">05</span> Your responsibilities</h2>
+  <ul>
+    <li>Use the App only for lawful purposes and in line with your own organization&rsquo;s policies for handling customer data that flows through Jira Service Management.</li>
+    <li>Do not reverse-engineer, decompile, or attempt to extract the App&rsquo;s source code beyond what Atlassian&rsquo;s platform inherently exposes.</li>
+    <li>Do not resell, sublicense, or redistribute the App independently of the Atlassian Marketplace.</li>
+  </ul>
+
+  <h2><span class="num">06</span> Warranty disclaimer</h2>
+  <p>The App is provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo;, without warranties of any kind, express or implied, including merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that the App will be uninterrupted, error-free, or that its comment-ordering assumptions will hold for every Jira Service Management configuration.</p>
+
+  <h2><span class="num">07</span> Limitation of liability</h2>
+  <p>To the maximum extent permitted by law, our total liability arising from or related to this Agreement will not exceed the fees you paid for the App in the twelve (12) months preceding the claim. We are not liable for indirect, incidental, special, or consequential damages, including lost profits or lost data, even if advised of the possibility.</p>
+
+  <h2><span class="num">08</span> Term &amp; termination</h2>
+  <p>This Agreement lasts as long as your subscription to the App is active. Either party may end it by uninstalling the App (on your side) or by removing the App from Marketplace with reasonable notice (on ours). Sections 6, 7, and 9 survive termination.</p>
+
+  <h2><span class="num">09</span> Governing terms</h2>
+  <p>Where this Agreement is silent, the <a href="https://www.atlassian.com/legal/marketplace-terms" target="_blank" rel="noopener">Atlassian Marketplace Terms of Use</a> govern. Nothing here limits any right Atlassian itself provides you as a Marketplace customer.</p>
+
+  <h2><span class="num">10</span> Changes to this Agreement</h2>
+  <p>We may update this Agreement from time to time; the effective date above will change accordingly. Continued use of the App after an update constitutes acceptance of the revised Agreement.</p>
+
+  <h2><span class="num">11</span> Contact</h2>
+  <p><a href="mailto:isanayasiro10@gmail.com">isanayasiro10@gmail.com</a></p>
+
+  <footer class="doc-foot">
+    PublicThread for JSM &middot; an independently developed Atlassian Marketplace app for Jira Service Management Cloud &middot; not affiliated with or endorsed by Atlassian beyond standard Marketplace listing.
+  </footer>
+</div>
+</body>
+</html>
