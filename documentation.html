@@ -193,7 +193,7 @@
     <h1>PublicThread for JSM</h1>
     <div class="meta">
       <span><strong>Vendor</strong> Seisuke Nagahara</span>
-      <span><strong>Version</strong> 2.0.0</span>
+      <span><strong>Version</strong> 2.2.0</span>
       <span><strong>Contact</strong> <a href="mailto:support@asunoki.jp">support@asunoki.jp</a></span>
     </div>
   </header>
@@ -212,11 +212,11 @@
   <h2><span class="num">02</span> Action settings</h2>
   <table class="field-table">
     <tr><th>Field</th><th>What it does</th></tr>
-    <tr><td>Request/Issue key</td><td>The Service Management request to read. Usually left as <code>{{issue.key}}</code> so the action runs against the issue the rule is triggered on.</td></tr>
-    <tr><td>Maximum comments</td><td>How many of the most recent public comments to include (1&ndash;50). Leave blank for the default of 10.</td></tr>
+    <tr><td>Issue Key</td><td>The Service Management request to read. Usually left as <code>{{issue.key}}</code> so the action runs against the issue the rule is triggered on.</td></tr>
+    <tr><td>Max Comments</td><td>How many of the most recent public comments to include (1&ndash;50). Leave blank for the default of 10.</td></tr>
     <tr><td>Show author name</td><td>When on, each comment is prefixed with the commenter&rsquo;s display name.</td></tr>
     <tr><td>Show timestamp</td><td>When on, each comment includes when it was posted.</td></tr>
-    <tr><td>Include agent replies</td><td>When on (default), public replies from support agents are included alongside the customer&rsquo;s own comments. Turn it off to keep only the customer&rsquo;s side of the conversation.</td></tr>
+    <tr><td>Include public replies from agents</td><td>When on (default), public replies from support agents are included alongside the customer&rsquo;s own comments. Turn it off to leave out replies from agents; customers are identified as the request&rsquo;s reporter and participants. If that participant information cannot be retrieved, agent replies are not excluded (public comments are still returned, and internal notes are never included).</td></tr>
   </table>
 
   <div class="callout">
@@ -224,14 +224,14 @@
   </div>
 
   <h2><span class="num">03</span> Using the output</h2>
-  <p>Automation names the action&rsquo;s output after the action itself, camelCased. For an action added as <strong>Get Public Conversation (PublicThread for JSM)</strong> with the default outputs entity name, later steps reference it as <code>{{fetchedJiraThread.&hellip;}}</code>:</p>
+  <p>Later steps in the rule can use the output of <strong>Get Public Conversation (PublicThread for JSM)</strong> through the <code>thread</code> entity, as <code>{{thread.&hellip;}}</code>:</p>
   <table class="field-table">
     <tr><th>Smart Value</th><th>Contents</th></tr>
-    <tr><td><code>{{fetchedJiraThread.conversationText}}</code></td><td>Plain-text transcript of the included comments, in chronological order.</td></tr>
-    <tr><td><code>{{fetchedJiraThread.conversationHtml}}</code></td><td>The same transcript, pre-escaped and ready to paste into an HTML email body.</td></tr>
-    <tr><td><code>{{fetchedJiraThread.commentCount}}</code></td><td>The number of comments included in the output.</td></tr>
+    <tr><td><code>{{thread.conversationText}}</code></td><td>Plain-text transcript of the included comments, in chronological order.</td></tr>
+    <tr><td><code>{{thread.conversationHtml}}</code></td><td>The same transcript, pre-escaped and ready to paste into an HTML email body.</td></tr>
+    <tr><td><code>{{thread.commentCount}}</code></td><td>The number of comments included in the output.</td></tr>
   </table>
-  <p>If your rule editor shows a different entity name for the action&rsquo;s output, use the name shown there instead &mdash; Automation derives it from the action&rsquo;s position in the rule, and it can vary rule to rule.</p>
+  <p>If your rule editor shows a different entity name for the action&rsquo;s output, use the name shown there instead.</p>
 
   <h3>Example: a summary email</h3>
   <pre><code>Action: Send email
@@ -240,15 +240,15 @@ Subject: Update on {{issue.key}}
 Body:
 Hi {{issue.reporter.displayName}},
 
-Here is the conversation so far ({{fetchedJiraThread.commentCount}} comments):
+Here is the conversation so far ({{thread.commentCount}} comments):
 
-{{fetchedJiraThread.conversationText}}</code></pre>
+{{thread.conversationText}}</code></pre>
 
   <h2><span class="num">04</span> Troubleshooting</h2>
   <ul>
     <li><strong>Output is empty / commentCount is 0.</strong> The request may have no public comments yet, or the running user may not have permission to view it &mdash; the action reflects the same access the rule&rsquo;s actor has.</li>
-    <li><strong>Agent replies missing.</strong> Check that <em>Include agent replies</em> is turned on.</li>
-    <li><strong>Smart Value shows literally as <code>{{fetchedJiraThread...}}</code>.</strong> The entity name in your rule differs from the example above &mdash; open the action step in the rule editor to see the exact name Automation assigned it.</li>
+    <li><strong>Agent replies missing.</strong> Check that <em>Include public replies from agents</em> is turned on.</li>
+    <li><strong>Smart Value shows literally as <code>{{thread...}}</code>.</strong> The entity name in your rule differs from the example above &mdash; open the action step in the rule editor to see the exact name.</li>
   </ul>
 
   <h2><span class="num">05</span> Related documents</h2>
