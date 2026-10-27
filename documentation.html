@@ -224,12 +224,12 @@
   </div>
 
   <h2><span class="num">03</span> Using the output</h2>
-  <p>Later steps in the rule can use the output of <strong>Get Public Conversation (PublicThread for JSM)</strong> through the <code>thread</code> entity, as <code>{{thread.&hellip;}}</code>:</p>
+  <p>Later steps in the rule can use the output of <strong>Get Public Conversation (PublicThread for JSM)</strong> as <code>{{fetchedJiraThread.&hellip;}}</code>:</p>
   <table class="field-table">
     <tr><th>Smart Value</th><th>Contents</th></tr>
-    <tr><td><code>{{thread.conversationText}}</code></td><td>Plain-text transcript of the included comments, in chronological order.</td></tr>
-    <tr><td><code>{{thread.conversationHtml}}</code></td><td>The same transcript, pre-escaped and ready to paste into an HTML email body.</td></tr>
-    <tr><td><code>{{thread.commentCount}}</code></td><td>The number of comments included in the output.</td></tr>
+    <tr><td><code>{{fetchedJiraThread.conversationText}}</code></td><td>Plain-text transcript of the included comments, in chronological order.</td></tr>
+    <tr><td><code>{{fetchedJiraThread.conversationHtml}}</code></td><td>The same transcript, pre-escaped and ready to paste into an HTML email body.</td></tr>
+    <tr><td><code>{{fetchedJiraThread.commentCount}}</code></td><td>The number of comments included in the output.</td></tr>
   </table>
   <p>If your rule editor shows a different entity name for the action&rsquo;s output, use the name shown there instead.</p>
 
@@ -240,15 +240,15 @@ Subject: Update on {{issue.key}}
 Body:
 Hi {{issue.reporter.displayName}},
 
-Here is the conversation so far ({{thread.commentCount}} comments):
+Here is the conversation so far ({{fetchedJiraThread.commentCount}} comments):
 
-{{thread.conversationText}}</code></pre>
+{{fetchedJiraThread.conversationText}}</code></pre>
 
   <h2><span class="num">04</span> Troubleshooting</h2>
   <ul>
     <li><strong>Output is empty / commentCount is 0.</strong> The request may have no public comments yet, or the running user may not have permission to view it &mdash; the action reflects the same access the rule&rsquo;s actor has.</li>
     <li><strong>Agent replies missing.</strong> Check that <em>Include public replies from agents</em> is turned on.</li>
-    <li><strong>Smart Value shows literally as <code>{{thread...}}</code>.</strong> The entity name in your rule differs from the example above &mdash; open the action step in the rule editor to see the exact name.</li>
+    <li><strong>Smart Value shows literally as <code>{{fetchedJiraThread...}}</code>.</strong> Make sure the Get Public Conversation step runs <em>before</em> the step that uses its output, and check the spelling (<code>fetchedJiraThread</code>, case-sensitive).</li>
   </ul>
 
   <h2><span class="num">05</span> Related documents</h2>
