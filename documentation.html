@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PublicThread for JSM Documentation</title>
+<title>PublicThread for JSM Documentation: Public Comments in Jira Automation</title>
+<meta name="description" content="Set up PublicThread for JSM: add the Get Public Conversation action to a Jira Automation rule and reuse public JSM request comments as plain text or HTML.">
+<link rel="canonical" href="https://asunokio-official.github.io/publicthread-jsm-docs/documentation.html">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
@@ -190,7 +192,7 @@
 <div class="page">
   <header class="doc-head">
     <div class="eyebrow">Documentation</div>
-    <h1>PublicThread for JSM</h1>
+    <h1>PublicThread for JSM documentation</h1>
     <div class="meta">
       <span><strong>Vendor</strong> Seisuke Nagahara</span>
       <span><strong>Version</strong> 2.2.0</span>
@@ -199,6 +201,18 @@
   </header>
 
   <p>PublicThread for JSM adds one action to Jira Automation: <strong>Get Public Conversation (PublicThread for JSM)</strong>. This page covers how to add it to a rule, what each setting does, and how to use its output in later steps.</p>
+  <p>Install the app from the <a href="https://marketplace.atlassian.com/apps/2407939928/publicthread-for-jsm">PublicThread for JSM listing on the Atlassian Marketplace</a>. See also the <a href="index.html">document index</a>.</p>
+
+  <h2 id="quick-start"><span class="num">00</span> Quick start</h2>
+  <p>A minimal rule that copies the public conversation of a request into a comment, so you can see the output before building emails or reports:</p>
+  <ol>
+    <li>In a Jira Service Management project, create an Automation rule with the <strong>Manual trigger</strong>.</li>
+    <li>Add the action <strong>Get Public Conversation (PublicThread for JSM)</strong> and set <strong>Issue Key</strong> to <code>{{issue.key}}</code>. Leave the other fields at their defaults.</li>
+    <li>Add the action <strong>Add comment to work item</strong> with the comment <code>{{fetchedJiraThread.conversationText}}</code>. To keep the result away from customers, post it as an internal comment.</li>
+    <li>Save the rule, open a test request that has both public comments and internal notes, and run the rule from the request&rsquo;s Automation menu.</li>
+    <li>The new comment contains only the comments marked public. Use <code>{{fetchedJiraThread.commentCount}}</code> to check how many were included.</li>
+  </ol>
+
 
   <h2><span class="num">01</span> Adding the action to a rule</h2>
   <ol>
@@ -253,6 +267,8 @@ Here is the conversation so far ({{fetchedJiraThread.commentCount}} comments):
 
   <h2><span class="num">05</span> Related documents</h2>
   <ul>
+    <li><a href="https://marketplace.atlassian.com/apps/2407939928/publicthread-for-jsm">PublicThread for JSM on the Atlassian Marketplace</a></li>
+    <li><a href="index.html">Document index</a></li>
     <li><a href="privacy-policy.html">Privacy Policy</a></li>
     <li>End User Agreement &mdash; this app uses Atlassian's standard End User License Agreement (Bonterms Cloud Terms), applied automatically through the Atlassian Marketplace listing. No separate agreement is required.</li>
   </ul>
