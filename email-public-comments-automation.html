@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Only Public JSM Comments with Jira Automation (Native vs PublicThread)</title>
+<meta name="description" content="How to send only the customer-visible (public) comments of a Jira Service Management request in an Automation email: the native smart value template, its caveats, and when the PublicThread for JSM action helps.">
+<link rel="canonical" href="https://asunokio-official.github.io/publicthread-jsm-docs/email-public-comments-automation.html">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #faf9f6;
+    --surface: #ffffff;
+    --ink: #21242c;
+    --ink-soft: #4b5160;
+    --muted: #767c8a;
+    --border: #e4e1d8;
+    --accent: #35507d;
+    --accent-soft: #eef2f8;
+    --code-bg: #f2f0ea;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14161b;
+      --surface: #1a1d24;
+      --ink: #e7e6e1;
+      --ink-soft: #b9bcc4;
+      --muted: #8b909c;
+      --border: #2b2f38;
+      --accent: #8fb2e0;
+      --accent-soft: #202838;
+      --code-bg: #21242c;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #14161b;
+    --surface: #1a1d24;
+    --ink: #e7e6e1;
+    --ink-soft: #b9bcc4;
+    --muted: #8b909c;
+    --border: #2b2f38;
+    --accent: #8fb2e0;
+    --accent-soft: #202838;
+    --code-bg: #21242c;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', -apple-system, 'Hiragino Sans', sans-serif;
+    line-height: 1.7;
+    padding-inline: 20px;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding-block: 56px 80px;
+  }
+
+  header.doc-head {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 28px;
+    margin-bottom: 40px;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(28px, 5vw, 38px);
+    margin: 10px 0 14px;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .meta strong { color: var(--ink-soft); font-weight: 600; }
+
+  h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 44px 0 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  h2 .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 22px 0 6px;
+  }
+
+  p, li { color: var(--ink-soft); font-size: 15.5px; max-width: 68ch; }
+  strong { color: var(--ink); }
+  ul, ol { padding-left: 1.3em; margin: 10px 0; }
+  li { margin-bottom: 6px; }
+
+  code {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--code-bg);
+    color: var(--ink);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 14px 0;
+  }
+  pre code { background: none; padding: 0; }
+
+  .callout {
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin: 18px 0;
+  }
+  .callout p { color: var(--ink-soft); margin: 0; font-size: 14.5px; }
+
+  .field-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 14.5px;
+  }
+  .field-table th, .field-table td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink-soft);
+    vertical-align: top;
+  }
+  .field-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .field-table td code { white-space: nowrap; }
+
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+  footer.doc-foot {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="doc-head">
+    <div class="eyebrow">Guide</div>
+    <h1>Email only the public comments of a JSM request with Jira Automation</h1>
+    <div class="meta">
+      <span><strong>Applies to</strong> Jira Service Management Cloud</span>
+      <span><strong>Checked</strong> October 2026</span>
+      <span><strong>Contact</strong> <a href="mailto:support@asunoki.jp">support@asunoki.jp</a></span>
+    </div>
+  </header>
+
+  <p>A common Automation rule sends a request&rsquo;s comment history to the customer, for example when the request is resolved. The catch: <code>{{issue.comments}}</code> returns <strong>all</strong> comments, including internal notes. This guide shows the native way to leave internal notes out, what to test, and when the PublicThread for JSM action is a better fit.</p>
+
+  <h2 id="native"><span class="num">01</span> The native way (no app)</h2>
+  <p>Atlassian&rsquo;s knowledge base article <a href="https://support.atlassian.com/jira/kb/email-comments-to-reporter-when-closing-jsm-ticket-cloud/">Email comments to reporter when closing JSM ticket (Cloud)</a> (updated September 2025) uses a <strong>Send email</strong> action with a comment loop and an <code>internal</code> check. The shape of the template is:</p>
+  <pre><code>{{#issue.comments}}{{#if(not(internal))}}
+Comment by: {{author.displayName}} at: {{created}}
+{{body}}
+{{/}}{{/}}</code></pre>
+  <p>For a rule triggered by a single new comment, the equivalent check is a <strong>Smart values condition</strong> on <code>{{comment.internal}}</code> equals <code>false</code>.</p>
+  <div class="callout">
+    <p><strong>Test before sending to customers.</strong> Run the rule on a test request that has a public reply, an internal note and (if you use them) a restricted comment, and send the email to yourself first. Community threads report that some comment types behave differently with the <code>internal</code> flag, so check your own setup.</p>
+  </div>
+
+  <h2 id="enough"><span class="num">02</span> When the native template is enough</h2>
+  <ul>
+    <li>You want every public comment, oldest to newest, in a plain email.</li>
+    <li>Someone on the team is comfortable maintaining the smart value template.</li>
+    <li>You have tested it with the comment types your agents actually use.</li>
+  </ul>
+  <p>If that describes your rule, you do not need an app. Jira Service Management&rsquo;s built-in customer notifications also already email public replies to the reporter and request participants.</p>
+
+  <h2 id="app"><span class="num">03</span> When PublicThread for JSM helps</h2>
+  <p><a href="https://marketplace.atlassian.com/apps/2407939928/publicthread-for-jsm">PublicThread for JSM</a> adds one Automation action, <strong>Get Public Conversation</strong>, that returns the public comments as ready-made text for the next step.</p>
+  <table class="field-table">
+    <tr><th>Need</th><th>Native template</th><th>PublicThread action</th></tr>
+    <tr><td>Leave out internal notes</td><td>The <code>internal</code> check in your template</td><td>Reads the request&rsquo;s comments through the Service Management request API with a public-only filter, then keeps only comments marked public in its own code. There is no setting to include internal notes.</td></tr>
+    <tr><td>Only the latest N comments</td><td>Not built in</td><td><strong>Max Comments</strong> 1&ndash;50 (default 10)</td></tr>
+    <tr><td>Customer messages only (no agent replies)</td><td>Extra conditions per comment</td><td><strong>Include public replies from agents</strong> off: keeps comments from the reporter and request participants</td></tr>
+    <tr><td>HTML email body</td><td>You build and escape it</td><td><code>{{fetchedJiraThread.conversationHtml}}</code> is pre-escaped</td></tr>
+    <tr><td>Count for conditions</td><td>You compute it</td><td><code>{{fetchedJiraThread.commentCount}}</code></td></tr>
+  </table>
+  <p>Setup is in the <a href="documentation.html#quick-start">Quick start</a>. A minimal email step:</p>
+  <pre><code>Action: Get Public Conversation (PublicThread for JSM)
+  Issue Key: {{issue.key}}
+Action: Send email
+  To: {{issue.reporter.emailAddress}}
+  Body: {{fetchedJiraThread.conversationText}}</code></pre>
+
+  <h2 id="limits"><span class="num">04</span> Limits of the app</h2>
+  <ul>
+    <li>Returns at most the 50 most recent public comments.</li>
+    <li>With agent replies turned off, customers are identified as the reporter and request participants. If that information cannot be read, agent replies are kept (internal notes are still excluded).</li>
+    <li>It reads with the permissions of the account that runs the rule, and it does not send email itself; your next Automation step does.</li>
+    <li>It does not store comments. It uses one read-only scope, <code>read:servicedesk-request</code>. See the <a href="privacy-policy.html">Privacy Policy</a>.</li>
+  </ul>
+
+  <h2><span class="num">05</span> Sources</h2>
+  <ul>
+    <li><a href="https://support.atlassian.com/jira/kb/email-comments-to-reporter-when-closing-jsm-ticket-cloud/">Email comments to reporter when closing JSM ticket (Cloud)</a> &mdash; Atlassian Support</li>
+    <li><a href="https://community.atlassian.com/forums/Jira-Service-Management/Comment-List-Without-Internal-Comments/qaq-p/2512119">Comment List Without Internal Comments</a> &mdash; Atlassian Community</li>
+    <li><a href="documentation.html">PublicThread for JSM documentation</a></li>
+  </ul>
+  <p>Atlassian may change smart value behavior; check the linked article for the current template.</p>
+
+  <footer class="doc-foot">
+    PublicThread for JSM &middot; an independently developed Atlassian Marketplace app for Jira Service Management Cloud &middot; not affiliated with or endorsed by Atlassian beyond standard Marketplace listing. Support: <a href="https://asunoki.jp/support/">asunoki.jp/support</a>
+  </footer>
+</div>
+</body>
+</html>

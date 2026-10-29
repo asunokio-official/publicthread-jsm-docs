@@ -35,9 +35,15 @@ Jira Service Management admins and agents who build Automation rules that email,
 
 A Jira administrator installs the app from the [Marketplace listing](https://marketplace.atlassian.com/apps/2407939928/publicthread-for-jsm) with **Try it free**. If you are not an administrator, the listing lets you submit a request to your administrator.
 
+## Guides
+
+- [Email only the public comments of a JSM request with Jira Automation (native template vs this app)](https://asunokio-official.github.io/publicthread-jsm-docs/email-public-comments-automation.html)
+
 ## Support
 
-Email [support@asunoki.jp](mailto:support@asunoki.jp). Issues in this repository are public, so please do not post customer data or confidential details there.
+Use the [ASUNOKI support page](https://asunoki.jp/support/) or email [support@asunoki.jp](mailto:support@asunoki.jp). Both are private.
+
+**Please do not open public GitHub issues for support.** Issues in this repository are public: never post customer names, email addresses, request content, site data, API tokens or passwords there (or anywhere public). We never need a password or token to help you.
 
 See also the [Privacy Policy](https://asunokio-official.github.io/publicthread-jsm-docs/privacy-policy.html).
 
